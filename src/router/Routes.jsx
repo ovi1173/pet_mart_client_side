@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
-        errorElement:<ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -48,20 +48,26 @@ const router = createBrowserRouter([
                 </PrivateRoute>
             },
             {
-                path:'/forget-pass/:email',
-                element:<ForgetPass></ForgetPass>
+                path: '/forget-pass/:email',
+                element: <ForgetPass></ForgetPass>
             },
             {
-                path:'/add-services',
-                element:<AddServices></AddServices>
+                path: '/add-services',
+                element: <PrivateRoute>
+                    <AddServices></AddServices>
+                </PrivateRoute>
             },
             {
-                path:'/my-services',
-                element:<MyServices></MyServices>
+                path: '/my-services',
+                element: <PrivateRoute>
+                    <MyServices></MyServices>
+                </PrivateRoute>
             },
             {
-                path:'/update-services/:id',
-                element:<UpdateService></UpdateService>
+                path: '/update-services/:id',
+                element: <PrivateRoute>
+                    <UpdateService></UpdateService>
+                </PrivateRoute>
             }
         ]
     },

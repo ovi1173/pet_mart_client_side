@@ -1,15 +1,66 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../Provider/AuthProvider';
+import { useParams } from 'react-router';
+import axios, { Axios } from 'axios';
 
 const UpdateService = () => {
-    return (
-        <div>
+    const { user } = useContext(AuthContext);
+    const { id } = useParams();
+    const [service, setService] = useState();
+    const [category, setCategory] = useState(service?.category)
+    useEffect(() => {
+        axios.get(`http://localhost:3000/services/${id}`)
+            .then(res => {
+                setService(res.data);
+                setCategory(service?.category);
+            })
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+    }, [id, service?.category])
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const category = form.category.value;
+        const price = parseInt(form.price.value);
+        const location = form.location.value;
+        const description = form.description.value;
+        const image = form.imgURL.value;
+        const date = form.date.value;
+        const email = form.email.value;
+
+        const formData = {
+            name,
+            category,
+            price,
+            location,
+            description,
+            image,
+            date,
+            email,
+            createdAt:service?.createdAt
+        }
+
+   axios.put(`http://localhost:3000/update/${id}`,formData)
+   .then(res=>{
+    console.log(res.data);
+   })
+   .catch(err=>console.log(err))
+    }
+    return (
+        <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg p-6 rounded-2xl">
+            <h2 className="text-2xl font-bold mb-5 text-center">
+                Update Listing
+            </h2>
+
+            <form onSubmit={handleUpdate} className="space-y-4">
 
                 {/* Name */}
                 <div>
                     <label className="block font-semibold mb-1">Product / Pet Name</label>
                     <input
+                        defaultValue={service?.name}
                         type="text"
                         className="w-full border p-2 rounded-lg"
                         placeholder="Enter name"
@@ -23,6 +74,8 @@ const UpdateService = () => {
                     <select
                         className="w-full border p-2 rounded-lg"
                         name='category'
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
                     >
                         <option value="pet">Pet</option>
                         <option value="food">Food</option>
@@ -35,6 +88,7 @@ const UpdateService = () => {
                 <div>
                     <label className="block font-semibold mb-1">Price</label>
                     <input
+                        defaultValue={service?.price}
                         type="number"
                         name='price'
                         min='0'
@@ -47,6 +101,7 @@ const UpdateService = () => {
                 <div>
                     <label className="block font-semibold mb-1">Location</label>
                     <input
+                        defaultValue={service?.location}
                         type="text"
                         className="w-full border p-2 rounded-lg"
                         placeholder="Enter location"
@@ -58,6 +113,7 @@ const UpdateService = () => {
                 <div>
                     <label className="block font-semibold mb-1">Description</label>
                     <textarea
+                        defaultValue={service?.description}
                         className="w-full border p-2 rounded-lg"
                         name='description'
                         placeholder="Write about the product or pet..."
@@ -68,6 +124,7 @@ const UpdateService = () => {
                 <div>
                     <label className="block font-semibold mb-1">Image URL</label>
                     <input
+                        defaultValue={service?.image}
                         type="text"
                         name='imgURL'
                         className="w-full border p-2 rounded-lg"
@@ -78,7 +135,7 @@ const UpdateService = () => {
                 {/* Pick-up Date */}
                 <div>
                     <label className="block font-semibold mb-1">Pick-up Date</label>
-                    <input type="date" name='date' className="w-full border p-2 rounded-lg" />
+                    <input type="date" defaultValue={service?.date} name='date' className="w-full border p-2 rounded-lg" />
                 </div>
 
                 {/* User Email */}
@@ -98,7 +155,7 @@ const UpdateService = () => {
                     type="submit"
                     className="w-full bg-blue-600 text-white p-2 rounded-lg font-semibold hover:bg-blue-700 transition"
                 >
-                    Submit
+                    Update
                 </button>
             </form>
         </div>
