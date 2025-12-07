@@ -12,7 +12,7 @@ const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/services/${id}`)
+        fetch(`https://backend-paws.vercel.app/services/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
             .catch(err => console.log(err));
@@ -50,13 +50,13 @@ const ServiceDetails = () => {
             phone,
             date: new Date()
         }
-        axios.post('http://localhost:3000/orders',formData)
-        .then(res=>{
-            console.log(res);
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        axios.post('https://backend-paws.vercel.app/orders', formData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (
@@ -79,7 +79,7 @@ const ServiceDetails = () => {
                     <p><strong>Provider:</strong> {service?.category}</p>
                     <p><strong>Provider Email:</strong> {service?.email}</p>
                     <p><strong>Price:</strong> ${service?.price}</p>
-                    <p><strong>Rating:</strong> {service?.date} </p>
+                    <p><strong>Date:</strong> {service?.date} </p>
                     {/* <p><strong>Slots Available:</strong> {service?.slotsAvailable}</p>
                     <p><strong>Category:</strong> {service?.category}</p> */}
                 </div>
@@ -87,7 +87,7 @@ const ServiceDetails = () => {
             {/* modals */}
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <button
-                className="btn"
+                className="btn btn-primary"
                 onClick={() => document.getElementById('my_modal_2').showModal()}
             >
                 Order/Adapt

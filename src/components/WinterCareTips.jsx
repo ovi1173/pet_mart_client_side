@@ -1,43 +1,46 @@
 import React from 'react';
-import { FaSnowflake, FaPaw, FaThermometerHalf, FaWater } from 'react-icons/fa';
 
 const WinterCareTips = () => {
-    const winterTips = [
+    const points = [
         {
             id: 1,
-            icon: <FaSnowflake className="text-blue-500 text-4xl" />,
-            title: "Keep Warm Indoors",
-            description: "Ensure your pets have a warm, cozy place to rest away from cold drafts."
+            title: "Every Adoption Saves a Life",
+            desc: "Millions of pets are abandoned every year. Adopting from PawMart gives them a second chance at a loving home.",
         },
         {
             id: 2,
-            icon: <FaPaw className="text-green-500 text-4xl" />,
-            title: "Protect Their Paws",
-            description: "Use pet booties or paw wax to protect paws from ice, salt, and cold surfaces."
+            title: "Companionship That Changes Lives",
+            desc: "Adopted pets develop deep emotional bonds with their new families, bringing joy, loyalty, and unconditional love.",
         },
         {
             id: 3,
-            icon: <FaThermometerHalf className="text-red-500 text-4xl" />,
-            title: "Monitor Body Temperature",
-            description: "Keep an eye on your pet's body temperature and limit outdoor exposure during extreme cold."
+            title: "Support Ethical Pet Care",
+            desc: "Choosing adoption means standing against unethical breeding and supporting responsible pet care practices.",
         },
-        {
-            id: 4,
-            icon: <FaWater className="text-cyan-500 text-4xl" />,
-            title: "Hydration is Key",
-            description: "Make sure pets have access to fresh water, as they can dehydrate even in winter."
-        }
     ];
 
     return (
-        <div>
-            <h2 className='my-8 text-center text-3xl font-bold'>Winter Care Tips for Pets</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
-                {winterTips.map((tip) => (
-                    <div key={tip.id} className="card bg-base-100 shadow-lg p-6 flex flex-col items-center text-center">
-                        <div className="mb-4">{tip.icon}</div>
-                        <h3 className="text-xl font-semibold mb-2">{tip.title}</h3>
-                        <p className="text-gray-600">{tip.description}</p>
+        <div className="px-4 sm:px-10 lg:px-20 py-12 bg-white">
+            <h2 className="text-center text-3xl font-bold text-gray-900 mb-6">
+                🐾 Why Adopt from PawMart?
+            </h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+                At PawMart, we believe every pet deserves a warm home and a loving family.  
+                Adopting a pet doesn’t just change their life—it transforms yours too.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {points.map((item) => (
+                    <div
+                        key={item.id}
+                        className="bg-gray-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border border-gray-200"
+                    >
+                        <h3 className="text-xl font-semibold text-gray-800">
+                            {item.title}
+                        </h3>
+                        <p className="text-gray-600 mt-2 leading-relaxed">
+                            {item.desc}
+                        </p>
                     </div>
                 ))}
             </div>

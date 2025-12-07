@@ -9,7 +9,7 @@ const UpdateService = () => {
     const [service, setService] = useState();
     const [category, setCategory] = useState(service?.category)
     useEffect(() => {
-        axios.get(`http://localhost:3000/services/${id}`)
+        axios.get(`https://backend-paws.vercel.app/services/${id}`)
             .then(res => {
                 setService(res.data);
                 setCategory(service?.category);
@@ -39,14 +39,14 @@ const UpdateService = () => {
             image,
             date,
             email,
-            createdAt:service?.createdAt
+            createdAt: service?.createdAt
         }
 
-   axios.put(`http://localhost:3000/update/${id}`,formData)
-   .then(res=>{
-    console.log(res.data);
-   })
-   .catch(err=>console.log(err))
+        axios.put(`https://backend-paws.vercel.app/update/${id}`, formData)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => console.log(err))
     }
     return (
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg p-6 rounded-2xl">

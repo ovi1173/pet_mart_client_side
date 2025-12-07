@@ -4,18 +4,18 @@ import { motion } from 'framer-motion';
 
 const Services = () => {
     const [services, setServices] = useState([]);
-    const [category,setCategory] = useState('')
+    const [category, setCategory] = useState('')
 
     useEffect(() => {
-        fetch(`http://localhost:3000/services?category=${category}`)
+        fetch(`https://backend-paws.vercel.app/services?category=${category}`)
             .then(res => res.json())
             .then(data => setServices(data))
             .catch(err => console.log(err));
-          
-            
+
+
     }, [category]);
     // console.log(category);
-    
+
 
     return (
         <div className="px-6 md:px-20 mt-12">
@@ -25,7 +25,7 @@ const Services = () => {
                 Our Premium Services
             </h2>
             <div className='flex justify-end mb-8'>
-                <select onChange={(e)=>setCategory(e.target.value)} defaultValue="Choose a category" className="select ">
+                <select onChange={(e) => setCategory(e.target.value)} defaultValue="Choose a category" className="select ">
                     <option disabled={true}>Choose Category</option>
                     <option value="">All</option>
                     <option value="Pet">Pet</option>

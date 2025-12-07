@@ -7,21 +7,21 @@ const PopularServices = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/services')
+        fetch('https://backend-paws.vercel.app/services')
             .then(res => res.json())
             .then(data => setServices(data))
             .catch(err => console.log(err));
 
         AOS.init({
             duration: 800,
-            once: true, 
+            once: true,
         });
     }, []);
 
     return (
         <div className="px-4 sm:px-10 lg:px-20 py-12">
             <h3 className="mb-10 text-center text-3xl font-bold text-gray-800">
-                Popular Pet Services
+                Popular Pet & Supplies
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -44,6 +44,8 @@ const PopularServices = () => {
                             <h2 className="card-title text-xl font-semibold text-gray-800">
                                 {service?.name}
                             </h2>
+                            <h3>Category: {service?.category}</h3>
+                            <h3>Location: {service?.location}</h3>
 
                             <div className="flex justify-between text-gray-600 mt-2">
                                 <p className="font-semibold">Price: ${service?.price}</p>

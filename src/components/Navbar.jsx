@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/pm.png';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { signOut } from 'firebase/auth';
@@ -59,13 +59,13 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-4 font-medium text-gray-700">
                     <li><NavLink to="/" className={activeClass}>Home</NavLink></li>
-                    <li><NavLink to="/services" className={activeClass}>Services</NavLink></li>
+                    <li><NavLink to="/services" className={activeClass}>Pet & Supplies</NavLink></li>
                     {
                         user && (
                             <>
                                 <li><NavLink to="/my-profile" className={activeClass}>My Profile</NavLink></li>
-                                <li><NavLink to="/add-services" className={activeClass}>Add Services</NavLink></li>
-                                <li><NavLink to="/my-services" className={activeClass}>My Services</NavLink></li>
+                                <li><NavLink to="/add-services" className={activeClass}>Add Listing</NavLink></li>
+                                <li><NavLink to="/my-services" className={activeClass}>My Listing</NavLink></li>
                                 <li><NavLink to="/my-orders" className={activeClass}>My Orders</NavLink></li>
                             </>
                         )
