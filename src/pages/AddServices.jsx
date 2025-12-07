@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddServices = () => {
     const { user } = useContext(AuthContext)
@@ -29,10 +30,35 @@ const AddServices = () => {
         }
 
         // console.log(formDate);
-        axios.post('http://localhost:3000/services',formData)
-        .then(res=>{
-            console.log(res);
-        })
+        axios.post('http://localhost:3000/services', formData)
+            .then(res => {
+                console.log(res);
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        title: "Service is added successfully",
+                        icon: "success",
+                        draggable: true
+                    });
+                    form.reset();
+                }
+
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+                }
+            })
+            .catch(err =>
+                console.log(err),
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                }))
     }
     return (
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg p-6 rounded-2xl">
